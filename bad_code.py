@@ -27,3 +27,6 @@ def process_data(data):
         result.append(_process_item(data[i]))
     return result
 
+        result.append(_process_item(data[i]))
+    return result
+
