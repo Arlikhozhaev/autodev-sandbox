@@ -18,24 +18,35 @@ def _is_valid_location(address, city, country):
     return bool(address and city and country)
 
 
-def _validate_user_input(first_name, last_name, email, password, phone, address, city, country):
-    return (
-        _is_valid_name(first_name, last_name)
-        and _is_valid_email(email)
-        and _is_valid_password(password)
-        and _is_valid_phone(phone)
-        and _is_valid_location(address, city, country)
-    )
 
 
-def create_user(first_name, last_name, email, password, phone, address, city, country, zip_code, role):
-    if not _validate_user_input(first_name, last_name, email, password, phone, address, city, country):
+def _validate_user_input(
+    first_name, last_name, email, password,
+    phone, address, city, country
+):
+    return all([
+        first_name, last_name, email, password,
+        phone, address, city, country
+    ])
+
+
+def create_user(
+    first_name, last_name, email, password,
+    phone, address, city, country, zip_code, role
+):
+    if not _validate_user_input(
+        first_name, last_name, email, password,
+        phone, address, city, country
+    ):
         return None
     user = {
         "name": f"{first_name} {last_name}",
         "email": email,
         "phone": phone,
-        "address": f"{address}, {city}, {country} {zip_code}",
-        "role": role or "user"
+        "address": (
+            f"{address}, {city},"
+            f" {country} {zip_code}"
+        ),
+        "role": role or "user",
     }
     return user
