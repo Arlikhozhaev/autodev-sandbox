@@ -1,3 +1,5 @@
+from dataclasses import dataclass
+
 def _is_valid_name(first_name, last_name):
     return bool(first_name and last_name)
 
@@ -44,12 +46,28 @@ def create_user(
     return user
 
 
-def _validate_user_input(
-    first_name, last_name, email, password,
-    phone, address, city, country
-):
+
+
+@dataclass
+class UserInput:
+    first_name: str
+    last_name: str
+    email: str
+    password: str
+    phone: str
+    address: str
+    city: str
+    country: str
+
+
+def _validate_user_input(user_input: UserInput):
     return all([
-        first_name, last_name, email,
-        password, phone, address,
-        city, country,
+        user_input.first_name,
+        user_input.last_name,
+        user_input.email,
+        user_input.password,
+        user_input.phone,
+        user_input.address,
+        user_input.city,
+        user_input.country
     ])
