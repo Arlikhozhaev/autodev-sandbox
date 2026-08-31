@@ -20,14 +20,6 @@ def _is_valid_location(address, city, country):
 
 
 
-def _validate_user_input(
-    first_name, last_name, email, password,
-    phone, address, city, country
-):
-    return all([
-        first_name, last_name, email, password,
-        phone, address, city, country
-    ])
 
 
 def create_user(
@@ -50,3 +42,14 @@ def create_user(
         "role": role or "user",
     }
     return user
+
+
+def _validate_user_input(
+    first_name, last_name, email, password,
+    phone, address, city, country
+):
+    return all([
+        first_name, last_name, email,
+        password, phone, address,
+        city, country,
+    ])
